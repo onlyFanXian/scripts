@@ -20,7 +20,7 @@ func convertImage(at path: URL) {
     process.arguments = [
         "--setProperty", "format", "heic",
         path.path,
-        "--out", outputURL.path
+        "--out", outputURL.path,
     ]
 
     do {
@@ -44,7 +44,9 @@ func processPath(_ inputPath: URL) {
     var isDir: ObjCBool = false
     if fileManager.fileExists(atPath: inputPath.path, isDirectory: &isDir) {
         if isDir.boolValue {
-            if let enumerator = fileManager.enumerator(at: inputPath, includingPropertiesForKeys: nil) {
+            if let enumerator = fileManager.enumerator(
+                at: inputPath, includingPropertiesForKeys: nil)
+            {
                 for case let fileURL as URL in enumerator {
                     if supportedExtensions.contains(fileURL.pathExtension.lowercased()) {
                         filesToConvert.append(fileURL)
